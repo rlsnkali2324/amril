@@ -1,0 +1,30 @@
+<!doctype html>
+<html>
+<head>
+  <style>
+      html { font-family: sans-serif; }
+  </style>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+<body>
+
+<h1>Inner Frame</h1>
+
+<div id="originOutput"></div>
+
+<!-- Based on crbug.com/991568 + https://bugs.chromium.org/p/chromium/issues/attachmentText?aid=405814 -->
+<input tabindex="1" id="inputField" onkeydown="window.top.location = 'https://example.com'">
+<input tabindex="2" onfocus="window.top.location = 'https://example.net'">
+
+<script>
+
+originOutput.innerText = window.location.origin;
+
+setInterval(() => {
+  inputField.focus();
+}, 100);
+
+</script>
+
+</body>
+</html>
